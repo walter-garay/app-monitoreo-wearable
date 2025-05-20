@@ -53,7 +53,7 @@ private val LightColorScheme = lightColorScheme(
     fun AppMonitoreoTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false, // Por defecto vino en true
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {

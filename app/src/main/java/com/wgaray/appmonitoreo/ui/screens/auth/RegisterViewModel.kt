@@ -3,7 +3,8 @@ package com.wgaray.appmonitoreo.ui.screens.auth
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.wgaray.appmonitoreo.domain.model.Usuario
-import com.wgaray.appmonitoreo.domain.usecase.RegisterUseCase
+import com.wgaray.appmonitoreo.domain.usecase.auth.RegisterUseCase
+import com.wgaray.appmonitoreo.domain.usecase.session.SaveSessionUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -12,7 +13,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RegisterViewModel @Inject constructor(
-    private val registerUseCase: RegisterUseCase
+    private val registerUseCase: RegisterUseCase,
+    private val saveSessionUseCase: SaveSessionUseCase
 ) : ViewModel() {
 
     private val _state = MutableStateFlow<RegisterState>(RegisterState.Idle)
@@ -22,10 +24,12 @@ class RegisterViewModel @Inject constructor(
         viewModelScope.launch {
             _state.value = RegisterState.Loading
             val result = registerUseCase(name, email, password)
-            _state.value = if (result.isSuccess) {
-                RegisterState.Success(result.getOrNull()!!)
+            if (result.isSuccess) {
+                val usuario = result.getOrNull()!!
+                saveSessionUseCase(usuario) // <-- Guardar sesión
+                _state.value = RegisterState.Success(usuario)
             } else {
-                RegisterState.Error(result.exceptionOrNull()?.message ?: "Error desconocido")
+                _state.value = RegisterState.Error(result.exceptionOrNull()?.message ?: "Error desconocido")
             }
         }
     }

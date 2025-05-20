@@ -4,7 +4,7 @@ import javax.inject.Inject
 
 import com.wgaray.appmonitoreo.data.datasource.AuthApiService
 import com.wgaray.appmonitoreo.data.model.RegisterRequest
-import com.wgaray.appmonitoreo.domain.model.Usuario;
+import com.wgaray.appmonitoreo.domain.model.Usuario
 import com.wgaray.appmonitoreo.domain.repository.AuthRepository
 
 
@@ -16,6 +16,7 @@ class AuthRepositoryImpl @Inject constructor(private val api: AuthApiService) : 
             )
             Result.success(
                 Usuario(
+                    id = response.user.id,
                     name = response.user.name,
                     email = response.user.email,
                     rol = response.user.rol,
