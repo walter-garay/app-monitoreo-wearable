@@ -66,6 +66,7 @@ object AppModule {
         return ClearSessionUseCase(repository)
     }
 
+
     // SÍNTOMAS
     @Provides
     @Singleton

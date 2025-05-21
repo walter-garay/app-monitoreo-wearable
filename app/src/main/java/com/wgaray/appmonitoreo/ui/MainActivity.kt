@@ -15,6 +15,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.wgaray.appmonitoreo.ui.screens.navigation.NavRoutes
 import com.wgaray.appmonitoreo.ui.screens.MainScreen
+import com.wgaray.appmonitoreo.ui.screens.auth.LoginScreen
 
 
 @AndroidEntryPoint
@@ -45,6 +46,9 @@ fun AppNavigation() {
     ) {
         composable(NavRoutes.Register) {
             RegisterScreen(navController)
+        }
+        composable(NavRoutes.Login) {
+            LoginScreen(navController)
         }
         composable(NavRoutes.Main) {
             MainScreen()

@@ -1,5 +1,7 @@
 package com.wgaray.appmonitoreo.data.datasource
 
+import com.wgaray.appmonitoreo.data.model.LoginRequest
+import com.wgaray.appmonitoreo.data.model.LoginResponse
 import com.wgaray.appmonitoreo.data.model.RegisterRequest
 import com.wgaray.appmonitoreo.data.model.RegisterResponse
 
@@ -11,4 +13,7 @@ interface AuthApiService {
     @Headers("Accept: application/json")
     @POST("register")
     suspend fun register(@Body request: RegisterRequest): RegisterResponse
+
+    @POST("login")
+    suspend fun login(@Body request: LoginRequest): LoginResponse
 }

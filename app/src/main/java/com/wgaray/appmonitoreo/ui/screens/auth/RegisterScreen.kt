@@ -18,13 +18,7 @@ import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.ui.text.input.VisualTransformation
 
-
-
-
-
-
 import androidx.hilt.navigation.compose.hiltViewModel
-
 
 import androidx.navigation.NavController
 import com.wgaray.appmonitoreo.ui.screens.navigation.NavRoutes
@@ -211,7 +205,7 @@ fun RegisterScreen(
 
                     // Enlace a login
                     TextButton(
-                        onClick = { navController.navigate("login") },
+                        onClick = { navController.navigate(NavRoutes.Login) },
                         modifier = Modifier.fillMaxWidth()
                     ) {
                         Text(
