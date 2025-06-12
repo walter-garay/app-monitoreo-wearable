@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.wgaray.appmonitoreo.data.datasource.AuthApiService
 import com.wgaray.appmonitoreo.data.datasource.AuthInterceptor
+import com.wgaray.appmonitoreo.data.datasource.SaludApiService
 import com.wgaray.appmonitoreo.data.datasource.SintomaApiService
 import com.wgaray.appmonitoreo.data.local.SessionPreferencesDataSource
 import com.wgaray.appmonitoreo.util.LocalDateTimeAdapter
@@ -66,4 +67,9 @@ object NetworkModule {
     @Singleton
     fun provideSintomaApiService(retrofit: Retrofit): SintomaApiService =
         retrofit.create(SintomaApiService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideSaludApiService(retrofit: Retrofit): SaludApiService =
+        retrofit.create(SaludApiService::class.java)
 }

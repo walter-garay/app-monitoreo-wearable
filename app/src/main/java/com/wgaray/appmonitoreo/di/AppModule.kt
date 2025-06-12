@@ -1,6 +1,7 @@
 package com.wgaray.appmonitoreo.di
 
 import android.content.Context
+import com.wgaray.appmonitoreo.data.datasource.SaludApiService
 import com.wgaray.appmonitoreo.data.local.SessionPreferencesDataSource
 import com.wgaray.appmonitoreo.data.repository.AuthRepositoryImpl
 import com.wgaray.appmonitoreo.data.repository.SessionRepositoryImpl
@@ -14,8 +15,11 @@ import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 import com.wgaray.appmonitoreo.data.datasource.SintomaApiService
+import com.wgaray.appmonitoreo.data.repository.SaludRepositoryImpl
 import com.wgaray.appmonitoreo.data.repository.SintomaRepositoryImpl
+import com.wgaray.appmonitoreo.domain.repository.SaludRepository
 import com.wgaray.appmonitoreo.domain.repository.SintomaRepository
+import com.wgaray.appmonitoreo.domain.usecase.salud.ObtenerDatosSaludUseCase
 
 import com.wgaray.appmonitoreo.domain.usecase.session.ClearSessionUseCase
 import com.wgaray.appmonitoreo.domain.usecase.session.GetSessionUseCase
@@ -85,6 +89,21 @@ object AppModule {
     fun provideObtenerSintomasUseCase(repository: SintomaRepository): ObtenerSintomasUseCase {
         return ObtenerSintomasUseCase(repository)
     }
+
+
+    // SALUD
+    @Provides
+    @Singleton
+    fun provideSaludRepository(api: SaludApiService): SaludRepository {
+        return SaludRepositoryImpl(api)
+    }
+
+    @Provides
+    @Singleton
+    fun provideObtenerDatosSaludUseCase(repository: SaludRepository): ObtenerDatosSaludUseCase {
+        return ObtenerDatosSaludUseCase(repository)
+    }
+
 
 
 }

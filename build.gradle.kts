@@ -5,4 +5,11 @@ plugins {
     alias(libs.plugins.kotlin.compose) apply false
 
     id("com.google.dagger.hilt.android") version "2.56.2" apply false
+
+}
+
+buildscript {
+    dependencies {
+            classpath("com.google.gms:google-services:4.4.2")
+    }
 }

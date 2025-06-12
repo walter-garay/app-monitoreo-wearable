@@ -16,6 +16,12 @@ import androidx.navigation.compose.composable
 import com.wgaray.appmonitoreo.ui.screens.navigation.NavRoutes
 import com.wgaray.appmonitoreo.ui.screens.MainScreen
 import com.wgaray.appmonitoreo.ui.screens.auth.LoginScreen
+import com.wgaray.appmonitoreo.ui.screens.educacion.EducacionScreen
+import com.wgaray.appmonitoreo.ui.screens.educacion.SeccionEduScreen
+import com.wgaray.appmonitoreo.ui.screens.educacion.contenidoPorPaso
+import com.wgaray.appmonitoreo.ui.screens.educacion.pasosEducativos
+import com.wgaray.appmonitoreo.ui.screens.sintomas.HistorialScreen
+import com.wgaray.appmonitoreo.ui.screens.sintomas.RegistrarScreen
 
 
 @AndroidEntryPoint
@@ -51,7 +57,8 @@ fun AppNavigation() {
             LoginScreen(navController)
         }
         composable(NavRoutes.Main) {
-            MainScreen()
+            MainScreen() // Aquí inicia todo con barra de navegación inferior
         }
     }
 }
+

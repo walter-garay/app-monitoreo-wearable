@@ -30,8 +30,8 @@ fun LoginScreen(
     val state by viewModel.state.collectAsState()
     val snackbarHostState = remember { SnackbarHostState() }
 
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("coly@gmail.com") }
+    var password by remember { mutableStateOf("coly123456") }
     var passwordVisible by remember { mutableStateOf(false) }
 
     LaunchedEffect(state) {

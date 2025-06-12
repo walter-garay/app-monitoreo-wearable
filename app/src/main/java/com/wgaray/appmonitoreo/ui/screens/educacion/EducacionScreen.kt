@@ -1,24 +1,26 @@
 package com.wgaray.appmonitoreo.ui.screens.educacion
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.Alignment
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.background
-import androidx.compose.ui.draw.clip
-
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.wgaray.appmonitoreo.domain.model.PasoEducativo
+import com.wgaray.appmonitoreo.ui.screens.navigation.NavRoutes
 import com.wgaray.appmonitoreo.ui.theme.AppMonitoreoTheme
 
 @Composable
-fun EducacionScreen() {
+fun EducacionScreen(navController: NavHostController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -36,15 +38,18 @@ fun EducacionScreen() {
             modifier = Modifier.fillMaxSize()
         ) {
             items(pasosEducativos) { paso ->
-                PasoCard(paso)
+                PasoCard(paso = paso) {
+                    navController.navigate(NavRoutes.detallePasoRoute(paso.numero))
+                }
             }
         }
     }
 }
 
 @Composable
-fun PasoCard(paso: PasoEducativo) {
+fun PasoCard(paso: PasoEducativo, onClick: () -> Unit) {
     Card(
+        onClick = onClick,
         shape = MaterialTheme.shapes.large,
         modifier = Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(
@@ -92,11 +97,11 @@ fun PasoCard(paso: PasoEducativo) {
     }
 }
 
-
 @Preview(showBackground = true)
 @Composable
 fun EducacionScreenPreview() {
     AppMonitoreoTheme {
-        EducacionScreen()
+        // Este preview no puede usar NavController, solo se usa para el layout visual
+        EducacionScreen(navController = rememberNavController())
     }
 }

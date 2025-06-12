@@ -20,12 +20,12 @@ val pasosEducativos = listOf(
     ),
     PasoEducativo(
         numero = 4,
-        titulo = "Prevención",
+        titulo = "¿Cómo prevenir?",
         descripcion = "Medidas prácticas para cuidar tu salud"
     ),
     PasoEducativo(
         numero = 5,
-        titulo = "Cuándo acudir al médico",
+        titulo = "¿Cuándo acudir al médico?",
         descripcion = "Síntomas urgentes que no debes ignorar"
     )
 )

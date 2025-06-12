@@ -10,4 +10,11 @@ object NavRoutes {
     const val Sintomas = "sintomas"
     const val HistorialSintomas = "historial_sintomas"
 
+    const val DetallePasoBase = "detalle"
+
+    fun detallePasoRoute(pasoId: Int): String = "$DetallePasoBase/$pasoId"
+    const val DetallePasoConArg = "$DetallePasoBase/{pasoId}"
+
+    const val Salud = "salud"
+
 }
