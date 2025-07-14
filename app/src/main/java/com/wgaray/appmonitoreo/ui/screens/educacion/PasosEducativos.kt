@@ -6,26 +6,26 @@ val pasosEducativos = listOf(
     PasoEducativo(
         numero = 1,
         titulo = "¿Qué es la preeclampsia?",
-        descripcion = "Conoce este trastorno peligroso que afecta a las gestantes"
+        descripcion = "Entérate qué es y por qué es peligrosa"
     ),
     PasoEducativo(
         numero = 2,
-        titulo = "Síntomas frecuentes",
-        descripcion = "Aprende a reconocer las señales de alerta temprana"
+        titulo = "Síntomas clave",
+        descripcion = "Conoce las señales que debes vigilar"
     ),
     PasoEducativo(
         numero = 3,
         titulo = "Factores de riesgo",
-        descripcion = "Descubre qué condiciones aumentan tu riesgo"
+        descripcion = "Descubre si estás en mayor riesgo"
     ),
     PasoEducativo(
         numero = 4,
-        titulo = "¿Cómo prevenir?",
-        descripcion = "Medidas prácticas para cuidar tu salud"
+        titulo = "Cómo prevenirla",
+        descripcion = "Cuídate con controles y buenos hábitos"
     ),
     PasoEducativo(
         numero = 5,
-        titulo = "¿Cuándo acudir al médico?",
-        descripcion = "Síntomas urgentes que no debes ignorar"
+        titulo = "Cuándo ir al médico",
+        descripcion = "Actúa rápido ante síntomas graves"
     )
 )

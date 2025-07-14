@@ -19,6 +19,6 @@ interface AuthApiService {
     @POST("login")
     suspend fun login(@Body request: LoginRequest): LoginResponse
 
-    @POST("api/fcm/token")
+    @POST("fcm/token")
     suspend fun enviarTokenFCM(@Body request: FCMTokenRequest): Response<Unit>
 }

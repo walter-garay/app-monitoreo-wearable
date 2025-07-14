@@ -5,7 +5,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Login
+import androidx.compose.foundation.Image
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.*
@@ -21,6 +21,15 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.wgaray.appmonitoreo.ui.screens.navigation.NavRoutes
 import com.wgaray.appmonitoreo.ui.theme.AppMonitoreoTheme
+import androidx.compose.ui.res.painterResource
+import com.wgaray.appmonitoreo.R
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Shape
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.withStyle
 
 @Composable
 fun LoginScreen(
@@ -31,7 +40,7 @@ fun LoginScreen(
     val snackbarHostState = remember { SnackbarHostState() }
 
     var email by remember { mutableStateOf("coly@gmail.com") }
-    var password by remember { mutableStateOf("coly123456") }
+    var password by remember { mutableStateOf("coly@gmail.com") }
     var passwordVisible by remember { mutableStateOf(false) }
 
     LaunchedEffect(state) {
@@ -56,7 +65,8 @@ fun LoginScreen(
             Surface(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(paddingValues),
+                    .padding(paddingValues)
+                    .imePadding(), // para que el formulario se mueva con el teclado
                 color = MaterialTheme.colorScheme.background
             ) {
                 Column(
@@ -67,18 +77,19 @@ fun LoginScreen(
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Icon(
-                        imageVector = Icons.Default.Login,
-                        contentDescription = "Login",
-                        modifier = Modifier.size(64.dp),
-                        tint = MaterialTheme.colorScheme.primary
+                    // Icono de la app
+                    Image(
+                        painter = painterResource(id = R.drawable.mami_icono),
+                        contentDescription = "Icono app",
+                        modifier = Modifier
+                            .size(90.dp)
+                            .clip(CircleShape)
                     )
-
                     Spacer(modifier = Modifier.height(24.dp))
 
                     Text(
                         text = "Iniciar sesión",
-                        style = MaterialTheme.typography.headlineMedium,
+                        style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold),
                         color = MaterialTheme.colorScheme.onBackground
                     )
 
@@ -167,7 +178,12 @@ fun LoginScreen(
                         modifier = Modifier.fillMaxWidth()
                     ) {
                         Text(
-                            text = "¿No tienes cuenta? Regístrate aquí",
+                            buildAnnotatedString {
+                                append("¿No tienes cuenta? ")
+                                withStyle(SpanStyle(fontWeight = FontWeight.Bold)) {
+                                    append("Regístrate aquí")
+                                }
+                            },
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.primary
                         )

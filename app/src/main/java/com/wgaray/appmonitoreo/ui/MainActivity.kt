@@ -1,9 +1,13 @@
 package com.wgaray.appmonitoreo.ui
 
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
 import androidx.navigation.compose.rememberNavController
 import com.wgaray.appmonitoreo.ui.screens.auth.RegisterScreen
 import com.wgaray.appmonitoreo.ui.theme.AppMonitoreoTheme
@@ -16,18 +20,22 @@ import androidx.navigation.compose.composable
 import com.wgaray.appmonitoreo.ui.screens.navigation.NavRoutes
 import com.wgaray.appmonitoreo.ui.screens.MainScreen
 import com.wgaray.appmonitoreo.ui.screens.auth.LoginScreen
-import com.wgaray.appmonitoreo.ui.screens.educacion.EducacionScreen
-import com.wgaray.appmonitoreo.ui.screens.educacion.SeccionEduScreen
-import com.wgaray.appmonitoreo.ui.screens.educacion.contenidoPorPaso
-import com.wgaray.appmonitoreo.ui.screens.educacion.pasosEducativos
-import com.wgaray.appmonitoreo.ui.screens.sintomas.HistorialScreen
-import com.wgaray.appmonitoreo.ui.screens.sintomas.RegistrarScreen
+import androidx.compose.runtime.collectAsState
 
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    // Obtener el ViewModel usando Hilt
+    private val mainViewModel: MainViewModel by viewModels()
+
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Solicitar el permiso al iniciar la actividad
+        mainViewModel.checkAndRequestPermission(this)
+
         enableEdgeToEdge()
         setContent {
             AppMonitoreoTheme {
@@ -45,19 +53,22 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun AppNavigation() {
     val navController = rememberNavController()
+    val sessionViewModel: com.wgaray.appmonitoreo.ui.screens.auth.SessionViewModel = androidx.hilt.navigation.compose.hiltViewModel()
+    val usuario = sessionViewModel.session.collectAsState().value
+    val startDestination = if (usuario != null) com.wgaray.appmonitoreo.ui.screens.navigation.NavRoutes.Main else com.wgaray.appmonitoreo.ui.screens.navigation.NavRoutes.Login
 
-    NavHost(
+    androidx.navigation.compose.NavHost(
         navController = navController,
-        startDestination = NavRoutes.Register
+        startDestination = startDestination
     ) {
-        composable(NavRoutes.Register) {
-            RegisterScreen(navController)
+        composable(com.wgaray.appmonitoreo.ui.screens.navigation.NavRoutes.Register) {
+            com.wgaray.appmonitoreo.ui.screens.auth.RegisterScreen(navController)
         }
-        composable(NavRoutes.Login) {
-            LoginScreen(navController)
+        composable(com.wgaray.appmonitoreo.ui.screens.navigation.NavRoutes.Login) {
+            com.wgaray.appmonitoreo.ui.screens.auth.LoginScreen(navController)
         }
-        composable(NavRoutes.Main) {
-            MainScreen() // Aquí inicia todo con barra de navegación inferior
+        composable(com.wgaray.appmonitoreo.ui.screens.navigation.NavRoutes.Main) {
+            com.wgaray.appmonitoreo.ui.screens.MainScreen()
         }
     }
 }

@@ -1,0 +1,87 @@
+---
+alwaysApply: true
+---
+
+
+
+<!-- @title App móvil para monitoreo y prevención de preeclampsia en gestantes (Proyecto de tesis) -->
+
+<!-- @section Contexto -->
+
+Este proyecto forma parte de una tesis universitaria y tiene como objetivo mejorar la detección temprana y prevención de **preeclampsia** en mujeres gestantes de **Huánuco, Perú**.
+
+La solución completa está compuesta por:
+
+- Un **dispositivo wearable Huawei Watch D2**, que **no se conecta directamente con la app móvil**.
+- La **Huawei Health App**, que sincroniza automáticamente los datos del reloj con la **nube de Huawei**.
+- Un **backend Laravel 12** (ya desarollado aparte), que accede a la nube de Huawei, obtiene los signos vitales, los procesa y evalúa si hay anomalías.
+- Una **aplicación móvil para gestantes (este proyecto)**, que permite visualizar esta información, registrar síntomas y recibir notificaciones.
+
+<!-- @section Funcionamiento general -->
+
+1. La gestante usa un reloj Huawei que sincroniza sus signos vitales (presión arterial, ritmo cardíaco, etc.) mediante la app **Huawei Health**.
+2. Nuestro backend en Laravel accede a la **nube de Huawei**, obtiene los signos vitales y los guarda en nuestra base de datos.
+3. El backend analiza los datos y, si detecta patrones de riesgo, **envía alertas o recordatorios** a la app de la gestante a través de **Firebase Cloud Messaging (FCM)**.
+4. La app móvil consulta del backend (por medio de la api) para observar los signos vitales, el historial, y otras funcionalidades educativas.
+
+<!-- @section Funcionalidades de la App móvil (Este proyecto) -->
+
+La aplicación móvil para gestantes contará con los siguientes módulos:
+
+- **Notificaciones simples**: recordatorios enviados desde el backend vía **Firebase Cloud Messaging (FCM)**.
+- **Alertas**: notificaciones más invasivas con prioridad alta. Pueden incluir sonido, vibración y elementos visuales llamativos (por ejemplo, en caso de riesgo de preeclampsia).
+- **Módulo educativo**: pasos o niveles con información clara sobre la preeclampsia y su prevención.
+- **Registro manual de síntomas**: la gestante podrá ingresar síntomas que no pueden ser detectados automáticamente (como visión borrosa, dolor de cabeza, etc.) y visualizar su historial.
+- **Visualización de signos vitales**: se mostrará la información que el backend ha procesado desde la nube de Huawei, de forma clara, interpretada y con posibles etiquetas de alerta.
+- Toda la información que se muestra o registra está **centralizada y gestionada por el backend**.
+
+<!-- @section Tecnologías -->
+
+Estas son las tecnologías principales que vamos a utilizar:
+
+- **Jetpack Compose** para construir las interfaces de usuario.
+- **Material 3** como sistema de diseño visual.
+- **Kotlin 2.0.21** como lenguaje principal.
+- **ViewModel** de Android Architecture Components para manejar estados y lógica de presentación.
+- **Hilt** como sistema de inyección de dependencias.
+- **Coroutines** para operaciones asíncronas.
+- **Retrofit + Gson** para consumir la API REST del backend (Laravel Sanctum).
+- **OkHttp** para depuración de llamadas de red.
+- **Jetpack Datastore** para manejar la persistencia local del token de sesión.
+- **Firebase Messaging** para enviar y recibir notificaciones push.
+- **Android Navigation Compose** para la navegación entre pantallas.
+
+<!-- @section Arquitectura -->
+
+Se implementará una arquitectura **MVVM (Model-View-ViewModel)**, con separación clara de responsabilidades:
+
+- **UI** (pantallas en Compose) → consume estados desde el ViewModel.
+- **ViewModel** → coordina la lógica de presentación y delega operaciones a los casos de uso.
+- **UseCases** → encapsulan la lógica de negocio.
+- **Repository** → expone una API hacia los casos de uso.
+- **DataSource** → implementa el acceso real a los datos (API, almacenamiento local, etc.).
+
+Esta arquitectura facilita el mantenimiento, escalabilidad y testeo del código.
+
+<!-- @section Estructura de carpetas -->
+
+La app está organizada en el paquete raíz `com.wgaray.appmonitoreo`, y sus submódulos clave son:
+
+- `data` → contiene modelos, data sources, y repositorios.
+- `domain` → contiene modelos de dominio, interfaces de repositorios y casos de uso.
+- `ui` → contiene pantallas (`screens`), navegación y ViewModels.
+- `di` → contiene módulos para inyección con Hilt.
+- `theme` → configuración visual general (colores, tipografía).
+- `AppMonitoreoApplication.kt` → clase principal de la aplicación.
+
+<!-- @section Indicaciones importantes -->
+
+Cuando se solicite ayuda para implementar una funcionalidad:
+
+1. **Seguir estrictamente la arquitectura MVVM definida.**
+3. **De no estar seguro de algo, puedes revisar la estructura del proyecto y sus archivos.**
+4. **Siempre que termines de generar código, compílalo para que ver que no hay errores. Para ello, utiliza compileDebugKotlin.**
+5. **Debes ralizar los cambios automáticamente sin preguntarme.**
+6. **Sigue buenas prácticas de programación y añade comentarios estratégicos.**
+
+---

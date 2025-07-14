@@ -1,23 +1,27 @@
 package com.wgaray.appmonitoreo.ui.screens.navigation
 
-
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Info
-import androidx.compose.material.icons.filled.LocalHospital
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.Warning
+import androidx.compose.material.icons.rounded.AddCircle
+import androidx.compose.material.icons.rounded.History
+import androidx.compose.material.icons.rounded.Favorite
+import androidx.compose.material.icons.rounded.Person
+import androidx.compose.material.icons.rounded.School
+import androidx.compose.material.icons.rounded.MedicalServices
 import androidx.compose.ui.graphics.vector.ImageVector
+
+// Iconos: Salud = Favorite, Educación = School
 
 data class BottomNavItem(
     val route: String,
     val icon: ImageVector,
-    val title: String
+    val title: String,
+    val isCentral: Boolean = false
 )
 
 val bottomNavItems = listOf(
-    BottomNavItem(NavRoutes.Educacion, Icons.Filled.Info, "Educación"),
-    BottomNavItem(NavRoutes.Register, Icons.Filled.Person, "Register"),
-    BottomNavItem(NavRoutes.Sintomas, Icons.Default.Warning, "Síntomas"),
-    BottomNavItem(NavRoutes.Salud, Icons.Default.LocalHospital, "Salud")
+    BottomNavItem(NavRoutes.Salud, Icons.Rounded.Favorite, "Salud"),
+    BottomNavItem(NavRoutes.Educacion, Icons.Rounded.School, "Educación"),
+    BottomNavItem("registrar_sintoma", Icons.Rounded.AddCircle, "Agregar", isCentral = true),
+    BottomNavItem("historial_sintomas", Icons.Rounded.MedicalServices, "Síntomas"),
+    BottomNavItem(NavRoutes.Register, Icons.Rounded.Person, "Perfil")
 )

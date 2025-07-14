@@ -11,11 +11,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
+val FondoApp = Color(0xFFF6F2FF) // Morado claro para fondo de app
+
 private val DarkColorScheme = darkColorScheme(
     primary = MoradoPrincipal,
     primaryContainer = MoradoOscuro, // más oscuro para contraste en dark
     onPrimary = Color.White,
-    background = Color(0xFF121212), // fondo oscuro general
+    background = FondoApp,
     onBackground = Color(0xFFEDEDED), // texto claro para contraste
     surface = Color(0xFF1E1E1E), // superficies un poco más claras que el fondo
     onSurface = Color(0xFFEDEDED), // texto sobre superficie
@@ -27,7 +29,7 @@ private val LightColorScheme = lightColorScheme(
     primary = MoradoPrincipal,
     primaryContainer = MoradoClaro,
     onPrimary = Color.White,
-    background = Fondo,
+    background = FondoApp,
     onBackground = TextoPrimario,
     surface = Color.White,
     onSurface = TextoPrimario,

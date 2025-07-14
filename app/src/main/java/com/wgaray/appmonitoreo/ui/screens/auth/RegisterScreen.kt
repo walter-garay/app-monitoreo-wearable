@@ -13,7 +13,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.PersonAdd
+import androidx.compose.foundation.Image
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.ui.text.input.VisualTransformation
@@ -23,6 +23,15 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.wgaray.appmonitoreo.ui.screens.navigation.NavRoutes
 import com.wgaray.appmonitoreo.ui.theme.AppMonitoreoTheme
+import androidx.compose.ui.res.painterResource
+import com.wgaray.appmonitoreo.R
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Shape
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.withStyle
 
 
 @Composable
@@ -62,7 +71,8 @@ fun RegisterScreen(
             Surface(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(paddingValues),
+                    .padding(paddingValues)
+                    .imePadding(), // para que el formulario se mueva con el teclado
                 color = MaterialTheme.colorScheme.background
             ) {
                 Column(
@@ -73,20 +83,20 @@ fun RegisterScreen(
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    // Icono o logo de la app
-                    Icon(
-                        imageVector = Icons.Default.PersonAdd,
-                        contentDescription = "Registro",
-                        modifier = Modifier.size(64.dp),
-                        tint = MaterialTheme.colorScheme.primary
+                    // Icono de la app
+                    Image(
+                        painter = painterResource(id = R.drawable.mami_icono),
+                        contentDescription = "Icono app",
+                        modifier = Modifier
+                            .size(90.dp)
+                            .clip(CircleShape)
                     )
-
                     Spacer(modifier = Modifier.height(24.dp))
 
                     // Título
                     Text(
                         text = "Crear cuenta",
-                        style = MaterialTheme.typography.headlineMedium,
+                        style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold),
                         color = MaterialTheme.colorScheme.onBackground
                     )
 
@@ -209,7 +219,12 @@ fun RegisterScreen(
                         modifier = Modifier.fillMaxWidth()
                     ) {
                         Text(
-                            text = "¿Ya tienes una cuenta? Ingresa aquí",
+                            buildAnnotatedString {
+                                append("¿Ya tienes una cuenta? ")
+                                withStyle(SpanStyle(fontWeight = FontWeight.Bold)) {
+                                    append("Ingresa aquí")
+                                }
+                            },
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.primary
                         )

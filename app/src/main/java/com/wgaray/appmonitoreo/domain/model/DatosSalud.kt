@@ -12,3 +12,4 @@ data class DatosSalud(
 data class FrecuenciaCardiaca(val valor: Int, val unidad: String, val estado: String, val registradoEn: LocalDateTime)
 data class PresionArterial(val sistolica: Int, val diastolica: Int, val unidad: String, val estado: String, val registradoEn: LocalDateTime)
 data class Pasos(val cantidad: Int, val metaDiaria: Int, val estado: String)
+

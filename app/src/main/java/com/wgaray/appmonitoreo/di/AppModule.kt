@@ -1,6 +1,7 @@
 package com.wgaray.appmonitoreo.di
 
 import android.content.Context
+import com.wgaray.appmonitoreo.AppMonitoreoApplication
 import com.wgaray.appmonitoreo.data.datasource.SaludApiService
 import com.wgaray.appmonitoreo.data.local.SessionPreferencesDataSource
 import com.wgaray.appmonitoreo.data.repository.AuthRepositoryImpl
@@ -19,6 +20,7 @@ import com.wgaray.appmonitoreo.data.repository.SaludRepositoryImpl
 import com.wgaray.appmonitoreo.data.repository.SintomaRepositoryImpl
 import com.wgaray.appmonitoreo.domain.repository.SaludRepository
 import com.wgaray.appmonitoreo.domain.repository.SintomaRepository
+import com.wgaray.appmonitoreo.domain.usecase.permissions.RequestNotificationPermissionUseCase
 import com.wgaray.appmonitoreo.domain.usecase.salud.ObtenerDatosSaludUseCase
 
 import com.wgaray.appmonitoreo.domain.usecase.session.ClearSessionUseCase
@@ -104,6 +106,21 @@ object AppModule {
         return ObtenerDatosSaludUseCase(repository)
     }
 
+
+    // Permissions
+    @Provides
+    @Singleton
+    fun provideContext(application: AppMonitoreoApplication): Context {
+        return application.applicationContext
+    }
+
+    @Provides
+    @Singleton
+    fun provideRequestNotificationPermissionUseCase(
+        @ApplicationContext context: Context // Inyectamos el Context aquí
+    ): RequestNotificationPermissionUseCase {
+        return RequestNotificationPermissionUseCase(context)
+    }
 
 
 }

@@ -64,7 +64,10 @@ fun MainScreen() {
                 composable(NavRoutes.Salud) {
                     SaludScreen()
                 }
-
+                // Agregar la ruta para registrar síntoma
+                composable("registrar_sintoma") {
+                    RegistrarScreen(navController)
+                }
             }
         }
     }

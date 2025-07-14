@@ -81,13 +81,16 @@ dependencies {
 
     // Firebase para notificaciones
     implementation(platform("com.google.firebase:firebase-bom:33.13.0"))
-    implementation("com.google.firebase:firebase-messaging")
+    // implementation("com.google.firebase:firebase-messaging:24.1.1")
+    implementation("com.google.firebase:firebase-messaging-ktx")
+
 
     // Jetpack Datastore para guardar token localmente
     implementation("androidx.datastore:datastore-preferences:1.1.6")
 
     // Hilt (inyección de dependencias)
     implementation("com.google.dagger:hilt-android:2.56.2")
+    implementation(libs.firebase.config)
     kapt("com.google.dagger:hilt-compiler:2.56")
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
