@@ -21,6 +21,7 @@ import com.wgaray.appmonitoreo.ui.screens.navigation.NavRoutes
 import com.wgaray.appmonitoreo.ui.screens.salud.SaludScreen
 import com.wgaray.appmonitoreo.ui.screens.sintomas.HistorialScreen
 import com.wgaray.appmonitoreo.ui.screens.sintomas.RegistrarScreen
+import com.wgaray.appmonitoreo.ui.screens.perfil.PerfilScreen
 
 @Composable
 fun MainScreen() {
@@ -65,8 +66,12 @@ fun MainScreen() {
                     SaludScreen()
                 }
                 // Agregar la ruta para registrar síntoma
-                composable("registrar_sintoma") {
+                composable(NavRoutes.RegistrarSintoma) {
                     RegistrarScreen(navController)
+                }
+                // Ruta para la pantalla de perfil
+                composable(NavRoutes.Perfil) {
+                    PerfilScreen(navController)
                 }
             }
         }

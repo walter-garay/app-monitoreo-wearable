@@ -8,8 +8,11 @@ import com.wgaray.appmonitoreo.data.model.LoginRequest
 import com.wgaray.appmonitoreo.domain.model.Usuario
 import com.wgaray.appmonitoreo.domain.repository.AuthRepository
 import com.wgaray.appmonitoreo.data.model.FCMTokenRequest
+import com.wgaray.appmonitoreo.data.local.SessionPreferencesDataSource
 
 class AuthRepositoryImpl @Inject constructor(private val api: AuthApiService) : AuthRepository {
+
+    @Inject lateinit var sessionPreferences: com.wgaray.appmonitoreo.data.local.SessionPreferencesDataSource
 
     override suspend fun register(name: String, email: String, password: String, rol: String): Result<Usuario> {
         return try {
@@ -68,6 +71,20 @@ class AuthRepositoryImpl @Inject constructor(private val api: AuthApiService) : 
             // Maneja cualquier excepción que pueda ocurrir durante la llamada a la API
             Log.e("EXITO FCM", "Error al enviar token FCM al backend222", e)
             Result.failure(Exception("Error al enviar el token FCM al servidor", e))
+        }
+    }
+
+    override suspend fun logout(): Result<Unit> {
+        return try {
+            val response = api.logout()
+            if (response.isSuccessful) {
+                sessionPreferences.clearSession()
+                Result.success(Unit)
+            } else {
+                Result.failure(Exception("Error al cerrar sesión en el backend"))
+            }
+        } catch (e: Exception) {
+            Result.failure(Exception("Error al cerrar sesión", e))
         }
     }
 

@@ -16,5 +16,7 @@ object NavRoutes {
     const val DetallePasoConArg = "$DetallePasoBase/{pasoId}"
 
     const val Salud = "salud"
+    const val Perfil = "perfil"
+    const val RegistrarSintoma = "registrar_sintoma"
 
 }

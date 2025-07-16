@@ -56,14 +56,14 @@ fun BottomNavigationBar(navController: NavHostController) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-        items.forEach { item ->
+            items.forEachIndexed { index, item ->
                 val selected = currentRoute == item.route
                 if (item.isCentral) {
                     CentralNavBarItem(
                         selected = selected,
-                onClick = {
-                    if (currentRoute != item.route) {
-                        navController.navigate(item.route) {
+                        onClick = {
+                            if (currentRoute != item.route) {
+                                navController.navigate(item.route) {
                                     popUpTo(navController.graph.startDestinationId) { saveState = true }
                                     launchSingleTop = true
                                     restoreState = true
@@ -81,11 +81,11 @@ fun BottomNavigationBar(navController: NavHostController) {
                             if (currentRoute != item.route) {
                                 navController.navigate(item.route) {
                                     popUpTo(navController.graph.startDestinationId) { saveState = true }
-                            launchSingleTop = true
-                            restoreState = true
-                        }
-                    }
-                },
+                                    launchSingleTop = true
+                                    restoreState = true
+                                }
+                            }
+                        },
                         modifier = Modifier.weight(1f)
                     )
                 }

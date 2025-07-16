@@ -21,7 +21,7 @@ data class BottomNavItem(
 val bottomNavItems = listOf(
     BottomNavItem(NavRoutes.Salud, Icons.Rounded.Favorite, "Salud"),
     BottomNavItem(NavRoutes.Educacion, Icons.Rounded.School, "Educación"),
-    BottomNavItem("registrar_sintoma", Icons.Rounded.AddCircle, "Agregar", isCentral = true),
-    BottomNavItem("historial_sintomas", Icons.Rounded.MedicalServices, "Síntomas"),
-    BottomNavItem(NavRoutes.Register, Icons.Rounded.Person, "Perfil")
+    BottomNavItem(NavRoutes.RegistrarSintoma, Icons.Rounded.AddCircle, "Agregar", isCentral = true),
+    BottomNavItem(NavRoutes.HistorialSintomas, Icons.Rounded.MedicalServices, "Síntomas"),
+    BottomNavItem(NavRoutes.Perfil, Icons.Rounded.Person, "Perfil")
 )

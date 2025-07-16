@@ -21,4 +21,7 @@ interface AuthApiService {
 
     @POST("fcm/token")
     suspend fun enviarTokenFCM(@Body request: FCMTokenRequest): Response<Unit>
+
+    @POST("logout")
+    suspend fun logout(): Response<Unit>
 }

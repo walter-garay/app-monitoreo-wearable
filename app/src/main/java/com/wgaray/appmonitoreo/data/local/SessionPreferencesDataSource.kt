@@ -41,6 +41,7 @@ class SessionPreferencesDataSource(private val context: Context) {
         }
     }
 
+    // Borra todos los datos de usuario de DataStore (logout local)
     suspend fun clearSession() {
         context.dataStore.edit { it.clear() }
     }
